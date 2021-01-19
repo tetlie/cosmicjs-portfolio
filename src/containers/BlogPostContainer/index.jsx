@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Cosmic from 'cosmicjs'
+import Cosmic from 'cosmicjs';
 
 import {
   Container,
@@ -7,7 +7,7 @@ import {
   P,
 } from '../../components/MyStyledComponents'
 
-function ContactContainer() {
+function BlogPostContainer({ match }) {
 
   const [pageData, setPageData] = useState(null);
 
@@ -18,13 +18,15 @@ function ContactContainer() {
       read_key: process.env.READ_KEY 
     });
 
+
     bucket.getObject({
-      slug: 'contact-information',
-      props: 'slug,title,content'
+      slug: match.params.slug,
+      props: 'title,content,metadata'
     })
 
     .then(data => {
       setPageData(data.object)
+      console.log(data)
     })
     .catch(error => {
       console.log(error)
@@ -32,20 +34,27 @@ function ContactContainer() {
 
   }, []);
 
+  function renderHeaderImage() {
+    return (
+      <img src={pageData.metadata.header_image.url} alt=""></img>
+    );
+  }
+
   function renderSkeleton() {
     return (
       <p>Laster data...</p>
     );
   }
-
+  
   function renderPage() {
     return (
-      <main>
-        <Container>
-            <PageTitle>{pageData.title}</PageTitle>
-            <P dangerouslySetInnerHTML={{__html: pageData.content}}></P>
-        </Container>
-      </main>
+    <main>
+      <Container>
+          <PageTitle>{pageData.title}</PageTitle>
+          {pageData.metadata.header_image && renderHeaderImage()}
+          <P dangerouslySetInnerHTML={{__html: pageData.content}}></P>
+      </Container>
+    </main>
     )
   }
 
@@ -56,4 +65,4 @@ function ContactContainer() {
   )
 };
 
-export default ContactContainer;
+export default BlogPostContainer;

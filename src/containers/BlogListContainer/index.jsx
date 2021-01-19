@@ -4,10 +4,9 @@ import Cosmic from 'cosmicjs'
 import {
   Container,
   PageTitle,
-  P,
 } from '../../components/MyStyledComponents'
 
-function ContactContainer() {
+function BlogListContainer() {
 
   const [pageData, setPageData] = useState(null);
 
@@ -18,13 +17,13 @@ function ContactContainer() {
       read_key: process.env.READ_KEY 
     });
 
-    bucket.getObject({
-      slug: 'contact-information',
-      props: 'slug,title,content'
+    bucket.getObjects({
+      type: 'blog-posts',
+      limit: 5,
+      props: 'title,slug'
     })
-
     .then(data => {
-      setPageData(data.object)
+      setPageData(data)
     })
     .catch(error => {
       console.log(error)
@@ -37,15 +36,23 @@ function ContactContainer() {
       <p>Laster data...</p>
     );
   }
-
+  
   function renderPage() {
     return (
-      <main>
-        <Container>
-            <PageTitle>{pageData.title}</PageTitle>
-            <P dangerouslySetInnerHTML={{__html: pageData.content}}></P>
-        </Container>
-      </main>
+    <main>
+      <Container>
+          <PageTitle>Mine blogginnlegg</PageTitle>
+          <ul>
+            {pageData.objects.map(item => {
+              return (
+                <li key={item.slug}>
+                  <a href={`/blog/${item.slug}`}>{item.title}</a>
+                </li>
+              )
+            })}
+          </ul>
+      </Container>
+    </main>
     )
   }
 
@@ -56,4 +63,4 @@ function ContactContainer() {
   )
 };
 
-export default ContactContainer;
+export default BlogListContainer;

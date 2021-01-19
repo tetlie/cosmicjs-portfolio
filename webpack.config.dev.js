@@ -11,6 +11,7 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   devServer: {
+    historyApiFallback: true,
     static: './dist',
     hot: true
   },
@@ -27,6 +28,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ],
   output: {
+    publicPath: '/',
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
   },

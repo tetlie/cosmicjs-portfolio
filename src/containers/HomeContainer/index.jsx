@@ -3,10 +3,9 @@ import Cosmic from 'cosmicjs'
 import ProjectThumbnail from '../../components/ProjectThumbnail'
 import {
   Container,
-  Content,
-  H1,
+  PageTitle,
   P,
-} from '../../components/ComponentStyle'
+} from '../../components/MyStyledComponents'
 
 function HomeContainer() {
 
@@ -26,7 +25,6 @@ function HomeContainer() {
 
     .then(data => {
       setPageData(data.object)
-      console.log(data.object.metadata.projects)
     })
     .catch(error => {
       console.log(error)
@@ -44,9 +42,8 @@ function HomeContainer() {
   function renderPage() {
     return (
     <main>
-      <Container>
-        <Content>
-          <H1>{pageData.title}</H1>
+      <Container as="main">
+          <PageTitle>{pageData.title}</PageTitle>
           <P dangerouslySetInnerHTML={{__html: pageData.content}}></P>
           {pageData.metadata.projects.map(el => 
             <ProjectThumbnail
@@ -57,7 +54,6 @@ function HomeContainer() {
               technologies={el.metadata.technologies}
             />
           )}
-        </Content>
       </Container>
     </main>
     )

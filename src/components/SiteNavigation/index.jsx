@@ -82,6 +82,9 @@ export default function SiteNavigation() {
             <NavLink to="/about">About</NavLink>
           </NavItem>
           <NavItem>
+            <NavLink to="/blog">Blog</NavLink>
+          </NavItem>
+          <NavItem>
             <NavLink to="/contact">Contact</NavLink>
           </NavItem>
         </NavMenu>
