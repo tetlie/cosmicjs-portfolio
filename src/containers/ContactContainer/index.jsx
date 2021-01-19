@@ -3,10 +3,9 @@ import Cosmic from 'cosmicjs'
 
 import {
   Container,
-  Content,
-  H1,
+  PageTitle,
   P,
-} from '../../components/ComponentStyle'
+} from '../../components/MyStyledComponents'
 
 function ContactContainer() {
 
@@ -43,10 +42,8 @@ function ContactContainer() {
     return (
       <main>
         <Container>
-          <Content>
-            <H1>{pageData.title}</H1>
+            <PageTitle>{pageData.title}</PageTitle>
             <P dangerouslySetInnerHTML={{__html: pageData.content}}></P>
-          </Content>
         </Container>
       </main>
     )

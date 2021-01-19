@@ -1,29 +1,19 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  background: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 30px;
-  height: 100vh;
-  position: relative;
-  z-index: 1;
-`
-
-export const Content = styled.div`
-  max-width: 1200px;
-  position: absolute;
-  padding: 8px 24px;
+  width: 96%;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  
   display: flex;
   flex-direction: column;
-  align-items: center;
+  padding-top: 80px;
 `
 
-export const H1 = styled.h1`
-  color: #000;
-  font-size: 48px;
-  text-align: center;
+export const PageTitle = styled.h1`
+  font-size: 3rem;
+  font-weight: 700;
 
   @media screen and (max-width: 768px) {
     font-size: 40px;

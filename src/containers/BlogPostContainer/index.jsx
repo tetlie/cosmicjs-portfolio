@@ -3,10 +3,9 @@ import Cosmic from 'cosmicjs';
 
 import {
   Container,
-  Content,
-  H1,
+  PageTitle,
   P,
-} from '../../components/ComponentStyle'
+} from '../../components/MyStyledComponents'
 
 function BlogPostContainer({ match }) {
 
@@ -22,7 +21,7 @@ function BlogPostContainer({ match }) {
 
     bucket.getObject({
       slug: match.params.slug,
-      props: 'title,content'
+      props: 'title,content,metadata'
     })
 
     .then(data => {
@@ -35,21 +34,25 @@ function BlogPostContainer({ match }) {
 
   }, []);
 
+  function renderHeaderImage() {
+    return (
+      <img src={pageData.metadata.header_image.url} alt=""></img>
+    );
+  }
+
   function renderSkeleton() {
     return (
       <p>Laster data...</p>
     );
   }
-
   
   function renderPage() {
     return (
     <main>
       <Container>
-        <Content>
-          <H1>{pageData.title}</H1>
+          <PageTitle>{pageData.title}</PageTitle>
+          {pageData.metadata.header_image && renderHeaderImage()}
           <P dangerouslySetInnerHTML={{__html: pageData.content}}></P>
-        </Content>
       </Container>
     </main>
     )

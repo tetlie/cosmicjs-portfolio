@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Cosmic from 'cosmicjs'
-import ProjectThumbnail from '../../components/ProjectThumbnail'
+
 import {
   Container,
-  Content,
-  H1,
-  P,
-} from '../../components/ComponentStyle'
+  PageTitle,
+} from '../../components/MyStyledComponents'
 
 function BlogListContainer() {
 
@@ -43,8 +41,7 @@ function BlogListContainer() {
     return (
     <main>
       <Container>
-        <Content>
-          <H1>Mine blogginnlegg</H1>
+          <PageTitle>Mine blogginnlegg</PageTitle>
           <ul>
             {pageData.objects.map(item => {
               return (
@@ -54,7 +51,6 @@ function BlogListContainer() {
               )
             })}
           </ul>
-        </Content>
       </Container>
     </main>
     )

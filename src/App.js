@@ -20,8 +20,8 @@ function App() {
 
   return (
     <>
+      <GlobalStyle />
       <Router>
-        <GlobalStyle />
         <SiteNavigation />
         <Switch>
           <Route path="/about" component={AboutContainer} />
