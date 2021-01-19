@@ -7,6 +7,8 @@ import SiteNavigation from './components/SiteNavigation'
 import HomeContainer from './containers/HomeContainer'
 import AboutContainer from './containers/AboutContainer'
 import ContactContainer from './containers/ContactContainer'
+import BlogListContainer from './containers/BlogListContainer'
+import BlogPostContainer from './containers/BlogPostContainer'
 
 import {
   BrowserRouter as Router,
@@ -22,15 +24,11 @@ function App() {
         <GlobalStyle />
         <SiteNavigation />
         <Switch>
-          <Route path="/about">
-            <AboutContainer />
-          </Route>
-          <Route path="/contact">
-            <ContactContainer />
-          </Route>
-          <Route path="/">
-            <HomeContainer />
-          </Route>
+          <Route path="/about" component={AboutContainer} />
+          <Route path="/contact" component={ContactContainer} />
+          <Route path="/blog/:slug" component={BlogPostContainer} />
+          <Route path="/blog" component={BlogListContainer} />
+          <Route path="/" component={HomeContainer} exact />
         </Switch>
       </Router>
     </>
