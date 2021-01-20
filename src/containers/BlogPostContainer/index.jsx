@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Cosmic from 'cosmicjs';
 
+// import BlogPostContent from '../../components/BlogPostContent'
+
+
 import {
   Container,
   PageTitle,

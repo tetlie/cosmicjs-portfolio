@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Cosmic from 'cosmicjs'
+
 import ProjectThumbnail from '../../components/ProjectThumbnail'
-import {
-  Container,
-  PageTitle,
-  P,
-} from '../../components/MyStyledComponents'
+import { Container, PageTitle } from '../../components/MyStyledComponents'
 
 function HomeContainer() {
 
@@ -44,8 +41,8 @@ function HomeContainer() {
     <main>
       <Container as="main">
           <PageTitle>{pageData.title}</PageTitle>
-          <P dangerouslySetInnerHTML={{__html: pageData.content}}></P>
-          {pageData.metadata.projects.map(el => 
+          <Container dangerouslySetInnerHTML={{__html: pageData.content}}></Container>
+          {/* {pageData.metadata.projects.map(el => 
             <ProjectThumbnail
               key={el._id}
               title={el.title}
@@ -53,7 +50,7 @@ function HomeContainer() {
               imageUrl={el.metadata.project_image.url}
               technologies={el.metadata.technologies}
             />
-          )}
+          )} */}
       </Container>
     </main>
     )
@@ -61,7 +58,7 @@ function HomeContainer() {
 
   return (
     <>
-      {(pageData == null) ? renderSkeleton() : renderPage()}
+      {(pageData === null) ? renderSkeleton() : renderPage()}
     </>
   )
 };

@@ -13,6 +13,8 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: "Roboto", Helvetica, Sans-Serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   html,
