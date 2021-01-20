@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const Dotenv = require('dotenv-webpack');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -19,6 +20,11 @@ module.exports = {
       filename: 'index.html',
       template: './src/template.html',
       title: 'Produksjon'
+    }),
+    new CopyPlugin({
+      patterns: [
+        {from: './other', noErrorOnMissing: true}
+      ],
     }),
     new webpack.HotModuleReplacementPlugin()
   ],
