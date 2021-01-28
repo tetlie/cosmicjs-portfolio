@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Cosmic from 'cosmicjs'
+import Mapbox from 'mapbox-gl'
 
 import {
   Container,
@@ -7,9 +8,14 @@ import {
   P,
 } from '../../components/MyStyledComponents'
 
+let map = null;
+
 function ContactContainer() {
 
   const [pageData, setPageData] = useState(null);
+
+  Mapbox.accessToken = process.env.MAPBOX_API_KEY;
+  const mapElement = useRef(null);
 
   useEffect(() => {
     const client = new Cosmic();
@@ -32,6 +38,17 @@ function ContactContainer() {
 
   }, []);
 
+  useEffect(() => {
+    if(pageData !== null){
+      map = new Mapbox.Map({
+        container: mapElement.current,
+        style: 'mapbox://styles/mapbox/dark-v10',
+        zoom: 10,
+        center: [12.492285, 41.890466]
+      });
+    };
+  }, [pageData]);
+
   function renderSkeleton() {
     return (
       <p>Laster data...</p>
@@ -44,6 +61,7 @@ function ContactContainer() {
         <Container>
             <PageTitle>{pageData.title}</PageTitle>
             <P dangerouslySetInnerHTML={{__html: pageData.content}}></P>
+            <div style={{height='500px', width='500px' }} ref={mapElement}></div>
         </Container>
       </main>
     )
