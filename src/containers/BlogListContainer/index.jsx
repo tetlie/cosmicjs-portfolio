@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Cosmic from 'cosmicjs'
+import Cosmic from 'cosmicjs';
 
 import {
   Container,
   PageTitle,
-} from '../../components/MyStyledComponents'
+} from '../../components/MyStyledComponents';
+
+import PostLink from '../../components/PostLink';
 
 function BlogListContainer() {
 
@@ -20,7 +22,8 @@ function BlogListContainer() {
     bucket.getObjects({
       type: 'blog-posts',
       limit: 5,
-      props: 'title,slug'
+      props: 'title,slug,content',
+      sort: '-created_at'
     })
     .then(data => {
       setPageData(data)
@@ -39,20 +42,25 @@ function BlogListContainer() {
   
   function renderPage() {
     return (
-    <main>
+    <>
       <Container>
           <PageTitle>Mine blogginnlegg</PageTitle>
-          <ul>
             {pageData.objects.map(item => {
               return (
-                <li key={item.slug}>
-                  <a href={`/blog/${item.slug}`}>{item.title}</a>
-                </li>
+                <PostLink 
+                url={`/blog/${item.slug}`} 
+                title={item.title} 
+                date={`01.01.2021`}
+                key={item.slug}
+              />
+
+                // <li key={item.slug}>
+                //   <a href={`/blog/${item.slug}`}>{item.title}</a>
+                // </li>
               )
             })}
-          </ul>
       </Container>
-    </main>
+    </>
     )
   }
 
